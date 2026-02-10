@@ -1,0 +1,22 @@
+meta {
+  name: List Functions
+  type: http
+  seq: 1
+}
+
+post {
+  url: https://{{title_id}}.playfabapi.com/CloudScript/ListFunctions
+  body: none
+  auth: apikey
+}
+
+auth:apikey {
+  key: X-EntityToken
+  value: {{title_entity_token}}
+  placement: header
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}

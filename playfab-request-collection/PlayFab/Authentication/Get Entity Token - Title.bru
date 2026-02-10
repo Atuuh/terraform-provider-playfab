@@ -1,0 +1,27 @@
+meta {
+  name: Get Entity Token - Title
+  type: http
+  seq: 2
+}
+
+post {
+  url: https://{{title_id}}.playfabapi.com/Authentication/GetEntityToken
+  body: json
+  auth: apikey
+}
+
+auth:apikey {
+  key: X-SecretKey
+  value: {{secret_key}}
+  placement: header
+}
+
+script:post-response {
+  const data = res.getBody()
+  bru.setEnvVar("title_entity_token", data.data.EntityToken)
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}
