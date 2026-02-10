@@ -8,4 +8,4 @@ terraform {
 
 provider "playfab" {}
 
-data "playfab_coffees" "example" {}
+data "playfab_cloud_script" "example" {}
