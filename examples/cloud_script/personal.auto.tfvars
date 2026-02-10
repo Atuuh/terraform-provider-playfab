@@ -1,0 +1,2 @@
+playfab_title_id   = "127DE0"
+playfab_secret_key = "T1OJ3ENRCJ89CN17BBHDONRCKNDKHRWDREDA7DXW4MSMQP8QJF"
