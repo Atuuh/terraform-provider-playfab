@@ -141,5 +141,7 @@ func (p *playfabProvider) DataSources(_ context.Context) []func() datasource.Dat
 }
 
 func (p *playfabProvider) Resources(_ context.Context) []func() resource.Resource {
-	return nil
+	return []func() resource.Resource{
+		NewCloudScriptResource,
+	}
 }
