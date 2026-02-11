@@ -8,6 +8,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/types"
+	"github.com/hashicorp/terraform-plugin-log/tflog"
 )
 
 var (
@@ -86,6 +87,8 @@ func (r *cloudScriptResource) Read(ctx context.Context, req resource.ReadRequest
 	if resp.Diagnostics.HasError() {
 		return
 	}
+
+	tflog.Warn(ctx, "reading cloudscript resource", map[string]interface{}{"name": state.Name.ValueString()})
 
 	function, err := r.client.GetCloudScriptFunction(state.Name.ValueString())
 	if err != nil {

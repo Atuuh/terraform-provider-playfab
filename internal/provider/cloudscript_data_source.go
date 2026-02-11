@@ -11,6 +11,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/types"
+	"github.com/hashicorp/terraform-plugin-log/tflog"
 )
 
 var (
@@ -67,6 +68,9 @@ func (d *cloudScriptDataSource) Read(ctx context.Context, req datasource.ReadReq
 	var state cloudScriptDataSourceModel
 
 	functions, err := d.client.GetCloudScriptFunctions()
+	ctx = tflog.SetField(ctx, "functions", functions)
+	ctx = tflog.SetField(ctx, "f", ctx.Value("title_entity_token"))
+	tflog.Info(ctx, "functions datasource read")
 	if err != nil {
 		resp.Diagnostics.AddError(
 			"Unable to Read PlayFab Cloud Script Functions",
