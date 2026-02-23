@@ -1,0 +1,29 @@
+meta {
+  name: Register HTTP Function
+  type: http
+  seq: 3
+}
+
+post {
+  url: https://{{title_id}}.playfabapi.com/CloudScript/RegisterHttpFunction
+  body: json
+  auth: apikey
+}
+
+auth:apikey {
+  key: X-EntityToken
+  value: {{title_entity_token}}
+  placement: header
+}
+
+body:json {
+  {
+    "FunctionName": "Test Fn",
+    "FunctionUrl": "http://lol.url"
+  }
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}
