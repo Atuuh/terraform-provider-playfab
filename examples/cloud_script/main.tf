@@ -29,7 +29,7 @@ output "example_functions" {
 resource "playfab_function" "test" {
   name         = "Frank's Fun-ction"
   url          = "http://0.0.0.0:12345/api/dance/party"
-  trigger_type = "http"
+  trigger_type = "HTTP"
 }
 
 output "test_function" {
