@@ -22,3 +22,15 @@ func (c *Client) GetCloudScriptFunctions() ([]*Function, error) {
 		},
 	}, nil
 }
+
+func (c *Client) GetCloudScriptFunction(name string) (*Function, error) {
+	return &Function{
+		Name:        "Hard Coded Fn",
+		Address:     "http://localhost:12345/test",
+		TriggerType: "HTTP",
+	}, nil
+}
+
+func (c *Client) CreateCloudScriptFunction(function *Function) error {
+	return nil
+}
