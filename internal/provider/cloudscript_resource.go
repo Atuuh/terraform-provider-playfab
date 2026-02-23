@@ -98,6 +98,9 @@ func (r *cloudScriptResource) Read(ctx context.Context, req resource.ReadRequest
 		)
 		return
 	}
+	if function == nil {
+		return
+	}
 
 	state.Url = types.StringValue(function.Address)
 	state.TriggerType = types.StringValue(function.TriggerType)

@@ -144,6 +144,9 @@ func (c *Client) GetCloudScriptFunction(name string) (*Function, error) {
 	if err != nil {
 		return nil, err
 	}
+	if resp.StatusCode == http.StatusNotFound {
+		return nil, nil
+	}
 	if resp.StatusCode != http.StatusOK {
 		return nil, fmt.Errorf("received status code %d with body %s", resp.StatusCode, body)
 	}
