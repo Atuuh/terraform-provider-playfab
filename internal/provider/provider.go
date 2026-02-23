@@ -5,6 +5,7 @@ package provider
 
 import (
 	"context"
+	"fmt"
 	"os"
 	"terraform-provider-playfab/internal/playfab"
 
@@ -119,7 +120,12 @@ func (p *playfabProvider) Configure(ctx context.Context, req provider.ConfigureR
 		return
 	}
 
-	client, err := playfab.NewClient(&titleId, &secretKey)
+	transport := playfab.DefaultTransportConfig().WithHost(fmt.Sprintf("%s.playfabapi.com", titleId))
+	client := playfab.NewHTTPClientWithConfig(strfmt.Default, transport)
+
+	secretKeyAuth := httptransport.APIKeyAuth("X-SecretKey", "header", secretKey)
+	entityTokenResponse, err := client.Authentication.GetEntityToken(nil, secretKeyAuth)
+
 	if err != nil {
 		resp.Diagnostics.AddError(
 			"Unable to create PlayFab API Client",
@@ -129,6 +135,8 @@ func (p *playfabProvider) Configure(ctx context.Context, req provider.ConfigureR
 		)
 		return
 	}
+
+	entityToken := entityTokenResponse.Payload.Data.EntityToken
 
 	resp.DataSourceData = client
 	resp.ResourceData = client
